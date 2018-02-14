@@ -1,0 +1,25 @@
+<div>
+  <video id="video" width="320" height="240" preload autoplay loop muted></video>
+  <canvas id="canvas" width="320" height="240"></canvas>
+</div>
+<div>
+  <button (click)="getData()">Get Face Data</button>
+</div>
+<table class='table' *ngIf="face">
+  <thead>
+    <tr>
+      <th>Age</th>
+      <th>Gender</th>
+      <th>Has glasses</th>
+      <th>Hair color</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{ face.faceAttributes.age}}</td>
+      <td>{{ face.faceAttributes.gender }}</td>
+      <td>{{ face.faceAttributes.glasses }}</td>
+      <td>{{ face.faceAttributes.hair.hairColor[0].color }}</td>
+    </tr>
+  </tbody>
+</table>
