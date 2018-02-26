@@ -28,6 +28,7 @@ namespace FacialRecognitionApp
                 configuration.RootPath = "ClientApp/dist";
             });
 
+            services.AddSingleton<IConfiguration>(Configuration);
             services.AddSingleton<IFaceClientService, FaceClientService>();
             services.AddSingleton<IFaceRepsoitory, FaceRepository>();
         }

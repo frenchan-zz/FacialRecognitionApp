@@ -9,23 +9,18 @@ namespace FacialRecognitionApp.Services
 {
     public class FaceClientService : IFaceClientService
     {
-        public static IConfiguration Configuration { get; set; }
         private const string UriBase = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0";
+        private readonly IConfiguration _configuration;
 
-        public FaceClientService()
+        public FaceClientService(IConfiguration configuration)
         {
-            var builder = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json");
-
-            Configuration = builder.Build();
+            _configuration = configuration;
         }
-
 
         public async Task<string> DetectFace(ByteArrayContent byteArrayContent)
         {
             var client = new HttpClient();
-            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", Configuration.GetValue<string>("SubscriptionKey"));
+            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", _configuration["SubscriptionKey"]);
 
             const string requestParameters = "returnFaceId=true&returnFaceLandmarks=false&returnFaceAttributes=age,gender,headPose,smile,facialHair,glasses,emotion,hair,makeup,occlusion,accessories,blur,exposure,noise";
             const string uri = UriBase + "/detect?" + requestParameters;
@@ -47,7 +42,7 @@ namespace FacialRecognitionApp.Services
             var client = new HttpClient();
 
             // Request headers.
-            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", Configuration.GetValue<string>("SubscriptionKey"));
+            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", _configuration["SubscriptionKey"]);
 
             // Request parameters. A third optional parameter is "details".
             const string requestParameters = "returnFaceId=true&returnFaceLandmarks=false&returnFaceAttributes=age,gender,headPose,smile,facialHair,glasses,emotion,hair,makeup,occlusion,accessories,blur,exposure,noise";
