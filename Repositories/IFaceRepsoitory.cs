@@ -1,10 +1,9 @@
-﻿using SimpleClientService.Models;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace FacialRecognitionApp.Repositories
 {
     public interface IFaceRepsoitory
     {
-        Task<ApiResult> Post(string data);
+        Task<string> Post(string data);
     }
 }

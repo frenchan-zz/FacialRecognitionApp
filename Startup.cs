@@ -5,9 +5,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using SimpleClientService.Abstractions;
-using SimpleClientService.Services;
 
 namespace FacialRecognitionApp
 {
@@ -32,13 +29,12 @@ namespace FacialRecognitionApp
             });
 
             services.AddSingleton<IConfiguration>(Configuration);
-            services.AddSingleton<IClientService, ClientApiService>();
             services.AddSingleton<IFaceClientService, FaceClientService>();
             services.AddSingleton<IFaceRepsoitory, FaceRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -71,9 +67,6 @@ namespace FacialRecognitionApp
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
-
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
         }
     }
 }
