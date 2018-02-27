@@ -28,7 +28,12 @@ namespace FacialRecognitionApp.Controllers
 
             var response = await _faceRepository.Post(data.Data);
 
-            return new OkObjectResult(JsonConvert.DeserializeObject<IList<FaceModel>>(response).FirstOrDefault());
+            if(!response.IsSuccessStatusCode)
+            {
+                return new BadRequestObjectResult($"Error throwed: {response.ResponseStatusCode }");
+            }
+
+            return new OkObjectResult(JsonConvert.DeserializeObject<IList<FaceModel>>(response.ResponseBody).FirstOrDefault());
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using FacialRecognitionApp.Services;
+using SimpleClientService.Models;
 
 namespace FacialRecognitionApp.Repositories
 {
@@ -14,7 +15,7 @@ namespace FacialRecognitionApp.Repositories
             _faceClientService = faceClientService;
         }
 
-        public async Task<string> Post(string data)
+        public async Task<ApiResult> Post(string data)
         {
             var base64Array = Convert.FromBase64String(data);
 

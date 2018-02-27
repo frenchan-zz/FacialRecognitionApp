@@ -1,11 +1,12 @@
-﻿using System.Net.Http;
+﻿using SimpleClientService.Models;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace FacialRecognitionApp.Services
 {
     public interface IFaceClientService
     {
-        Task<string> DetectFace(ByteArrayContent byteArrayContent);
-        Task<string> DetectFace(string imageFilePath);
+        Task<ApiResult> DetectFace(ByteArrayContent byteArrayContent);
+        Task<ApiResult> DetectFace(string imageFilePath);
     }
 }

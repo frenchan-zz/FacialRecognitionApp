@@ -17,7 +17,7 @@ export class FaceDetectionComponent implements OnInit {
   faceApi: FaceApi = {
     data: ''
   };
-  face: Face;
+  public face: Face;
 
   constructor(private faceService: FaceService) { }
 
@@ -26,9 +26,10 @@ export class FaceDetectionComponent implements OnInit {
   }
 
   getData(): void {
-      this.faceApi.data = this.dataUri.replace(/^data:image\/(png|jpg|jpeg);base64,/, "");
-      this.faceService.getData(JSON.stringify(this.faceApi));
-      this.face = this.faceService.face;
+    this.faceApi.data = this.dataUri.replace(/^data:image\/(png|jpg|jpeg);base64,/, "");
+    var model = this.faceService.getData(JSON.stringify(this.faceApi)).subscribe(result => {
+      this.face = result;
+    }, error => console.error(error));
   }
 
   initTracker(): void {
