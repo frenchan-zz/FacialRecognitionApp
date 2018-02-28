@@ -1,6 +1,6 @@
 ﻿namespace FacialRecognitionApp.Models
 {
-    public class FaceApiModel
+    public class DataApiModel
     {
         public string Data { get; set; }
     }

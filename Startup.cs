@@ -1,3 +1,4 @@
+using FacialRecognitionApp.Abstractions;
 using FacialRecognitionApp.Repositories;
 using FacialRecognitionApp.Services;
 using Microsoft.AspNetCore.Builder;
@@ -35,6 +36,8 @@ namespace FacialRecognitionApp
             services.AddSingleton<IClientService, ClientApiService>();
             services.AddSingleton<IFaceClientService, FaceClientService>();
             services.AddSingleton<IFaceRepsoitory, FaceRepository>();
+            services.AddSingleton<IVisioService, VisioService>();
+            services.AddSingleton<IVisioRepository, VisioRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

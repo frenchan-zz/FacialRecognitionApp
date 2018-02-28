@@ -6,22 +6,22 @@ using SimpleClientService.Models;
 
 namespace FacialRecognitionApp.Repositories
 {
-    public class FaceRepository : IFaceRepsoitory
+    public class VisioRepository : IVisioRepository
     {
-        private readonly IFaceClientService _faceClientService;
+        private readonly IVisioService _visioService;
 
-        public FaceRepository(IFaceClientService faceClientService)
+        public VisioRepository(IVisioService visioService)
         {
-            _faceClientService = faceClientService;
+            _visioService = visioService;
         }
-
+        
         public async Task<ApiResult> Post(string data)
         {
             var base64Array = Convert.FromBase64String(data);
 
             var arrayContent = new ByteArrayContent(base64Array);
 
-            return await _faceClientService.DetectFace(arrayContent);
+            return await _visioService.Description(arrayContent);
         }
     }
 }

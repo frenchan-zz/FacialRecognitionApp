@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Configuration;
-using SimpleClientService.Abstractions;
 using SimpleClientService.Extensions;
 using SimpleClientService.Models;
 using System;
@@ -7,6 +6,8 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using SimpleClientService.Abstractions;
+using FacialRecognitionApp.Abstractions;
 
 namespace FacialRecognitionApp.Services
 {
@@ -23,7 +24,7 @@ namespace FacialRecognitionApp.Services
 
         public async Task<ApiResult> DetectFace(ByteArrayContent byteArrayContent)
         {
-            var uri = new Uri($"{ _configuration["ClientService:BaseApiUrl"] }/detect")
+            var uri = new Uri($"{ _configuration["ClientService:BaseApiUrl"] }face/v1.0/detect")
                 .AddParameter("returnFaceId", "true")
                 .AddParameter("returnFaceLandmarks", "false")
                 .AddParameter("returnFaceAttributes", "age,gender,headPose,smile,facialHair,glasses,emotion,hair,makeup,occlusion,accessories,blur,exposure,noise");
@@ -37,7 +38,7 @@ namespace FacialRecognitionApp.Services
 
         public async Task<ApiResult> DetectFace(string imageFilePath)
         {
-            var uri = new Uri($"{ _configuration["ClientService:BaseApiUrl"] }/detect")
+            var uri = new Uri($"{ _configuration["ClientService:BaseApiUrl"] }face/v1.0/detect")
                 .AddParameter("returnFaceId", "true")
                 .AddParameter("returnFaceLandmarks", "false")
                 .AddParameter("returnFaceAttributes", "age,gender,headPose,smile,facialHair,glasses,emotion,hair,makeup,occlusion,accessories,blur,exposure,noise");

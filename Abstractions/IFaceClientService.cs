@@ -1,8 +1,8 @@
-﻿using SimpleClientService.Models;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
+using SimpleClientService.Models;
 
-namespace FacialRecognitionApp.Services
+namespace FacialRecognitionApp.Abstractions
 {
     public interface IFaceClientService
     {

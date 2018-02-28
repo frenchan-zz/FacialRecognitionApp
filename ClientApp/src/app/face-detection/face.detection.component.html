@@ -3,23 +3,32 @@
   <canvas id="canvas" width="320" height="240"></canvas>
 </div>
 <div>
-  <button (click)="getData()">Get Face Data</button>
+  <button (click)="getData()">Get Person Description</button>
 </div>
-<table class='table' *ngIf="face">
-  <thead>
-    <tr>
-      <th>Age</th>
-      <th>Gender</th>
-      <th>Has glasses</th>
-      <th>Hair color</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>{{ face.faceAttributes.age}}</td>
-      <td>{{ face.faceAttributes.gender }}</td>
-      <td>{{ face.faceAttributes.glasses }}</td>
-      <td>{{ face.faceAttributes.hair.hairColor[0].color }}</td>
-    </tr>
-  </tbody>
-</table>
+<div *ngIf="person">
+  <p>{{ person.description }}</p>
+  <table class='table' *ngIf="person.faceAttributes">
+    <thead>
+      <tr>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>Has glasses</th>
+        <th>Hair color</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ person.faceAttributes.age}}</td>
+        <td>{{ person.faceAttributes.gender }}</td>
+        <td>{{ person.faceAttributes.glasses }}</td>
+        <td>{{ person.faceAttributes.hair.hairColor[0].color }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+    <p>Tags</p>
+    <ul *ngFor="let tag of person.tags">
+      <li>{{ tag.name }}</li>
+    </ul>
+  </div>
+</div>

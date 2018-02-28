@@ -3,6 +3,7 @@ import 'tracking/build/tracking.js';
 import 'tracking/build/data/face.js';
 import { FaceService } from '../face.service';
 import { FaceApi, Face } from '../face';
+import { PersonDescription } from "../person-description";
 
 
 @Component({
@@ -17,7 +18,7 @@ export class FaceDetectionComponent implements OnInit {
   faceApi: FaceApi = {
     data: ''
   };
-  public face: Face;
+  public person: PersonDescription;
 
   constructor(private faceService: FaceService) { }
 
@@ -27,8 +28,8 @@ export class FaceDetectionComponent implements OnInit {
 
   getData(): void {
     this.faceApi.data = this.dataUri.replace(/^data:image\/(png|jpg|jpeg);base64,/, "");
-    var model = this.faceService.getData(JSON.stringify(this.faceApi)).subscribe(result => {
-      this.face = result;
+    this.faceService.getData(JSON.stringify(this.faceApi)).subscribe(result => {
+      this.person = result;
     }, error => console.error(error));
   }
 
