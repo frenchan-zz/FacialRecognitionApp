@@ -16,8 +16,8 @@ export class RegistrationComponent implements OnInit {
   ngOnInit() {
   }
 
-  public sendValue(){
-    console.log('Input: ', this.str);
+  public sendValue() {
+    console.log('Input: ', this.str.toLowerCase());
     let model = new DataApiModel();
     model.data = this.str;
 
