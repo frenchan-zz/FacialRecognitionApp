@@ -6,7 +6,6 @@
   <button (click)="getData()">Get Person Description</button>
 </div>
 <div *ngIf="person">
-  <p>{{ person.description }}</p>
   <table class='table' *ngIf="person.faceAttributes">
     <thead>
       <tr>
@@ -26,7 +25,7 @@
     </tbody>
   </table>
   <div>
-    <p>Tags</p>
+    <p>Tagsli</p>
     <ul *ngFor="let tag of person.tags">
       <li>{{ tag.name }}</li>
     </ul>

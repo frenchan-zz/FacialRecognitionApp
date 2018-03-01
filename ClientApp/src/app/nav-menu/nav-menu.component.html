@@ -32,6 +32,11 @@
                 <span class='glyphicon glyphicon-th-list'></span> Face
               </a>
             </li>
+            <li [routerLinkActive]='["link-active"]'>
+              <a [routerLink]='["/registration"]' (click)='collapse()'>
+                <span class='glyphicon glyphicon-th-list'></span> Registration
+              </a>
+            </li>
           </ul>
         </div>
     </div>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import 'tracking/build/tracking.js';
 import 'tracking/build/data/face.js';
 import { FaceService } from '../face.service';
-import { FaceApi, Face } from '../face';
+import { FaceApi } from '../face';
 import { PersonDescription } from "../person-description";
 
 

@@ -11,6 +11,8 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { FaceDetectionComponent } from './face-detection/face.detection.component';
 import { FaceService } from './face.service';
+import {PersonGroupService} from './person-group.service';
+import { RegistrationComponent } from './registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import { FaceService } from './face.service';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    FaceDetectionComponent
+    FaceDetectionComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -29,11 +32,12 @@ import { FaceService } from './face.service';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'face', component: FaceDetectionComponent }
+      { path: 'face', component: FaceDetectionComponent },
+      { path: 'registration', component: RegistrationComponent}
     ])
   ],
   providers: [
-    FaceService
+    FaceService, PersonGroupService
   ],
   bootstrap: [AppComponent]
 })
