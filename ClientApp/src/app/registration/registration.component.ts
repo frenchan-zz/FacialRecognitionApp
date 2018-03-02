@@ -17,9 +17,8 @@ export class RegistrationComponent implements OnInit {
   }
 
   public sendValue() {
-    console.log('Input: ', this.str.toLowerCase());
     let model = new DataApiModel();
-    model.data = this.str;
+    model.data = this.str.toLowerCase();
 
     this.personGroupService.createGroup(JSON.stringify(model)).subscribe(result => {
       console.log('Result', result);

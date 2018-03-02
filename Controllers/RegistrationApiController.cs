@@ -28,7 +28,7 @@ namespace FacialRecognitionApp.Controllers
 
             if (response.IsSuccessStatusCode)
             {
-                return new OkObjectResult("works");
+                return new OkObjectResult(response.ResponseBody);
             }
             return new BadRequestObjectResult("Something went wrong");
         }

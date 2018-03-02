@@ -39,6 +39,7 @@ namespace FacialRecognitionApp
             services.AddSingleton<IVisioService, VisioService>();
             services.AddSingleton<IVisioRepository, VisioRepository>();
             services.AddSingleton<IPersonGroupService, PersonGroupService>();
+            services.AddSingleton<IPersonService, PersonService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
