@@ -21,7 +21,7 @@ namespace FacialRecognitionApp.Services
             _clientService = clientService;
         }
 
-        public async Task<ApiResult> AddFace(string personGroupId, string personId, string userData = null, string targetFace = null)
+        public async Task<ApiResult> AddFace(string personGroupId, string personId,  ByteArrayContent payload, string userData = null, string targetFace = null)
         {
             var uri = new Uri(
                     $"{_configuration["ClientService:BaseApiUrl"]}face/v1.0/persongroups/{personGroupId}/persons/{personId}/persistedFaces")
@@ -35,8 +35,6 @@ namespace FacialRecognitionApp.Services
 
         public async Task<ApiResult> Create(string personGroupId, StringContent payload)
         {
-            payload.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-
             var uri = new Uri(
                 $"{_configuration["ClientService:BaseApiUrl"]}face/v1.0/persongroups/{personGroupId}/persons");
             var result = await _clientService.SimpleExecute(uri, HttpMethod.Post, payload);

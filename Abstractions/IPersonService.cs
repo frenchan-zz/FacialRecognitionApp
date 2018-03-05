@@ -6,7 +6,7 @@ namespace FacialRecognitionApp.Abstractions
 {
     public interface IPersonService
     {
-        Task<ApiResult> AddFace(string personGroupId, string personId, string userData = null,
+        Task<ApiResult> AddFace(string personGroupId, string personId, ByteArrayContent payload, string userData = null,
             string targetFace = null);
         Task<ApiResult> Create(string personGroupId, StringContent payload);
         Task<ApiResult> Delete(string personGroupId, string personId);

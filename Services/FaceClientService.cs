@@ -59,5 +59,16 @@ namespace FacialRecognitionApp.Services
 
             return imageBytes;
         }
+
+        public async Task<ApiResult> VerifyFace(StringContent payload)
+        {
+            payload.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            var uri = new Uri($"{ _configuration["ClientService:BaseApiUrl"] }face/v1.0/verify");
+
+            var result = await _clientService.SimpleExecute(uri, HttpMethod.Post, payload);
+
+            return result;
+        }
     }
 }

@@ -1,6 +1,19 @@
 <p>
   Registration works!
 </p>
+<div>
+  <label for="groupName">Group Name:</label>
+  <input id="groupName" [(ngModel)]="groupName" title="Create" />
 
-<input id="str" [(ngModel)]="str" title="Create" />
-<button (click)="sendValue()">Create Person Group</button>
+  <label for="userName">User name:</label>
+  <input id="userName" [(ngModel)]="userName" title="User Name" />
+
+  <button (click)="registerGroup()">Register Group</button>
+</div>
+
+<div *ngIf="groups">
+  <label for="groupSelect">List of groups:</label>
+  <select name="groupSelect" id="groupSelect" *ngFor="let group of groups">
+    <option value="{{group.personGroupId}}">{{group.name}}</option>
+  </select>
+</div>

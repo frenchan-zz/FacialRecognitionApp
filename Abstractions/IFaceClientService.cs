@@ -8,5 +8,6 @@ namespace FacialRecognitionApp.Abstractions
     {
         Task<ApiResult> DetectFace(ByteArrayContent byteArrayContent);
         Task<ApiResult> DetectFace(string imageFilePath);
+        Task<ApiResult> VerifyFace(StringContent payload);
     }
 }

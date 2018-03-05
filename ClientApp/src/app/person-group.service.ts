@@ -1,5 +1,6 @@
 import {Inject, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import { PersonGroupApiModel } from "./person-group-api-model";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -14,6 +15,10 @@ export class PersonGroupService {
 
   public createGroup(data: string) {
     return this.httpClient.put<string>(this.baseUrl + 'api/RegistrationApi/Create', data, httpOptions);
+  }
+
+  public getGroupList() {
+    return this.httpClient.get<PersonGroupApiModel[]>(this.baseUrl + 'api/RegistrationApi/List');
   }
 
 }
