@@ -13,5 +13,6 @@ namespace FacialRecognitionApp.Abstractions
         Task<ApiResult> Get(string personGroupId, string personId);
         Task<ApiResult> List(string personGroupId, string start = null, string top = null);
         Task<ApiResult> Update(string personGroupId, string personId, StringContent payload);
+        Task<ApiResult> Train(string personGroupId);
     }
 }

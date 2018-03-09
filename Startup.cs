@@ -4,7 +4,6 @@ using FacialRecognitionApp.Repositories;
 using FacialRecognitionApp.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -35,7 +34,7 @@ namespace FacialRecognitionApp
 
             services.AddSingleton<IConfiguration>(Configuration);
             services.AddSingleton<IClientService, ClientApiService>();
-            services.AddSingleton<IFaceClientService, FaceClientService>();
+            services.AddSingleton<IFaceService, FaceClientService>();
             services.AddSingleton<IFaceRepsoitory, FaceRepository>();
             services.AddSingleton<IVisioService, VisioService>();
             services.AddSingleton<IVisioRepository, VisioRepository>();
@@ -76,7 +75,8 @@ namespace FacialRecognitionApp
 
                 if (env.IsDevelopment())
                 {
-                    spa.UseAngularCliServer(npmScript: "start");
+                    //spa.UseAngularCliServer(npmScript: "start");
+                    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
                 }
             });
 

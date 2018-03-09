@@ -11,8 +11,9 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { FaceDetectionComponent } from './face-detection/face.detection.component';
 import { FaceService } from './face.service';
-import {PersonGroupService} from './person-group.service';
+import { PersonGroupService } from './person-group.service';
 import { RegistrationComponent } from './registration/registration.component';
+import { RegistrationService} from "./registration.service";
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import { RegistrationComponent } from './registration/registration.component';
     ])
   ],
   providers: [
-    FaceService, PersonGroupService
+    FaceService, PersonGroupService, RegistrationService
   ],
   bootstrap: [AppComponent]
 })

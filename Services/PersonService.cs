@@ -28,7 +28,7 @@ namespace FacialRecognitionApp.Services
                 .AddParameter("userData", userData)
                 .AddParameter("targetFace", targetFace);
             
-            var result = await _clientService.SimpleExecute(uri, HttpMethod.Post);
+            var result = await _clientService.SimpleExecute(uri, HttpMethod.Post, payload);
 
             return result;
         }
@@ -81,6 +81,15 @@ namespace FacialRecognitionApp.Services
             var result = await _clientService.SimpleExecute(uri, new HttpMethod("PATCH"), payload);
 
             return result;
+        }
+
+        public async Task<ApiResult> Train(string personGroupId)
+        {
+            var uri = new Uri(
+                $"{_configuration["ClientService:BaseApiUrl"]}face/v1.0/persongroups/{personGroupId}/train");
+            var result = await _clientService.SimpleExecute(uri, HttpMethod.Post);
+
+            return result; 
         }
     }
 }

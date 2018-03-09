@@ -9,15 +9,17 @@ namespace FacialRecognitionApp.Controllers
     public class RegistrationApiController :  Controller
     {
         private readonly IPersonGroupService _personGroupService;
-        private readonly IPersonRepository _personRepository;
+        private readonly IRegistrationFactory _registrationFactory;
 
-        public RegistrationApiController(IPersonGroupService personGroupService, IPersonRepository personRepository)
+
+        public RegistrationApiController(IPersonGroupService personGroupService, IRegistrationFactory registrationFactory)
         {
             _personGroupService = personGroupService;
-            _personRepository = personRepository;
+            _registrationFactory = registrationFactory;
         }
 
-        
+        [HttpPost]
+        [Route("createPerson")]
         public async Task<IActionResult> CreatePerson([FromBody] RegisterApiModel data)
         {
             if (data == null)
@@ -25,15 +27,14 @@ namespace FacialRecognitionApp.Controllers
                 return new BadRequestObjectResult("Data is empty");
             }
 
-            var personResponse = await _personRepository.CreatePersonId(data);
+            var successfullyRegistered = await _registrationFactory.RegisterUser(data);
 
-            if (!personResponse.IsSuccessStatusCode)
+            if (successfullyRegistered)
             {
-                
+                return new OkResult();
             }
-            
-            return new BadRequestObjectResult("Data is empty");
 
+            return new BadRequestObjectResult("Registration failed");
         }
 
         [HttpGet]

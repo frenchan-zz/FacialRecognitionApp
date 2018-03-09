@@ -54,5 +54,24 @@ namespace FacialRecognitionApp.Controllers
 
             return new OkObjectResult(o);
         }
+
+        [HttpPost]
+        [Route("identify")]
+        public async Task<IActionResult> Identify([FromBody]IdentifyApiModel data)
+        {
+            if (data == null)
+            {
+                return new BadRequestObjectResult("Data is empty");
+            }
+
+            var isIdentify = await _faceRepository.IdentifyUser(data);
+            
+            if (isIdentify)
+            {
+                return new OkResult();
+            }
+
+            return new BadRequestObjectResult("Identity failed");
+        }
     }
 }

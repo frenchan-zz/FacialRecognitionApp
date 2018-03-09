@@ -5,7 +5,6 @@ import { FaceService } from '../face.service';
 import { FaceApi } from '../face';
 import { PersonDescription } from "../person-description";
 
-
 @Component({
   selector: 'app-face-detection',
   templateUrl: './face.detection.component.html',
@@ -24,6 +23,17 @@ export class FaceDetectionComponent implements OnInit {
 
   ngOnInit() {
     this.initTracker();
+  }
+
+  identifyUser() {
+    const model = {
+      "PersonGroupId": "group1",
+      "FaceData": this.dataUri.replace(/^data:image\/(png|jpg|jpeg);base64,/, "")
+    };
+
+    this.faceService.identifyUser(JSON.stringify(model)).subscribe(result => {
+      console.log(result);
+    }, error => console.error(error));
   }
 
   getData(): void {

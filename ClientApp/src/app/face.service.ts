@@ -16,4 +16,8 @@ export class FaceService {
   public getData(data: string) {
     return this.httpClient.post<PersonDescription>(this.baseUrl + 'api/FaceApi', data, httpOptions);
   }
+
+  public identifyUser(data: string) {
+    return this.httpClient.post(this.baseUrl + 'api/FaceApi/Identify', data, httpOptions);
+  }
 }

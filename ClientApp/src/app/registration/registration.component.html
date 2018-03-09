@@ -1,19 +1,24 @@
 <p>
-  Registration works!
+  Registration
 </p>
-<div>
-  <label for="groupName">Group Name:</label>
-  <input id="groupName" [(ngModel)]="groupName" title="Create" />
 
+<div>
+  <video id="video" width="320" height="240" preload autoplay loop muted></video>
+  <canvas id="canvas" width="320" height="240"></canvas>
+</div>
+<div *ngIf="groupList">
+  <h3>{{group.personGroupId}}</h3>
+  <label for="groupSelect">Select group to join:</label>
+  <select id="groupSelect" [(ngModel)]="group.personGroupId">
+    <option selected>Select group...</option>
+    <option *ngFor="let group of groupList" [value]="group.personGroupId">{{group.name}}</option>
+  </select>
+</div>
+<div>
   <label for="userName">User name:</label>
   <input id="userName" [(ngModel)]="userName" title="User Name" />
 
-  <button (click)="registerGroup()">Register Group</button>
+  <button (click)="registerPerson()">Register</button>
 </div>
 
-<div *ngIf="groups">
-  <label for="groupSelect">List of groups:</label>
-  <select name="groupSelect" id="groupSelect" *ngFor="let group of groups">
-    <option value="{{group.personGroupId}}">{{group.name}}</option>
-  </select>
-</div>
+

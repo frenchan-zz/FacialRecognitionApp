@@ -22,14 +22,15 @@ namespace FacialRecognitionApp.Repositories
         {
             var o = new
             {
-                Name = data.Name,
-                UserData = data.UserData
+                name = data.Name,
+                userData = data.UserData
             };
 
             var payload = new StringContent(JsonConvert.SerializeObject(o));
             payload.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
             var result = await _personService.Create(data.PersonGroupId, payload);
+            await _personService.Train(data.PersonGroupId);
 
             return result;
         }

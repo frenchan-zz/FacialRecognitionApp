@@ -11,7 +11,7 @@ using FacialRecognitionApp.Abstractions;
 
 namespace FacialRecognitionApp.Services
 {
-    public class FaceClientService : IFaceClientService
+    public class FaceClientService : IFaceService
     {
         private readonly IConfiguration _configuration;
         private readonly IClientService _clientService;
@@ -24,12 +24,11 @@ namespace FacialRecognitionApp.Services
 
         public async Task<ApiResult> DetectFace(ByteArrayContent byteArrayContent)
         {
-            var uri = new Uri($"{ _configuration["ClientService:BaseApiUrl"] }face/v1.0/detect")
+            var uri = new Uri($"{_configuration["ClientService:BaseApiUrl"]}face/v1.0/detect")
                 .AddParameter("returnFaceId", "true")
                 .AddParameter("returnFaceLandmarks", "false")
-                .AddParameter("returnFaceAttributes", "age,gender,headPose,smile,facialHair,glasses,emotion,hair,makeup,occlusion,accessories,blur,exposure,noise");
-
-            byteArrayContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+                .AddParameter("returnFaceAttributes",
+                    "age,gender,headPose,smile,facialHair,glasses,emotion,hair,makeup,occlusion,accessories,blur,exposure,noise");
 
             var result = await _clientService.SimpleExecute(uri, HttpMethod.Post, byteArrayContent);
 
@@ -38,10 +37,11 @@ namespace FacialRecognitionApp.Services
 
         public async Task<ApiResult> DetectFace(string imageFilePath)
         {
-            var uri = new Uri($"{ _configuration["ClientService:BaseApiUrl"] }face/v1.0/detect")
+            var uri = new Uri($"{_configuration["ClientService:BaseApiUrl"]}face/v1.0/detect")
                 .AddParameter("returnFaceId", "true")
                 .AddParameter("returnFaceLandmarks", "false")
-                .AddParameter("returnFaceAttributes", "age,gender,headPose,smile,facialHair,glasses,emotion,hair,makeup,occlusion,accessories,blur,exposure,noise");
+                .AddParameter("returnFaceAttributes",
+                    "age,gender,headPose,smile,facialHair,glasses,emotion,hair,makeup,occlusion,accessories,blur,exposure,noise");
 
             var byteData = GetImageAsByteArray(imageFilePath);
             var content = new ByteArrayContent(byteData);
@@ -51,7 +51,7 @@ namespace FacialRecognitionApp.Services
 
             return result;
         }
-
+        
         private static byte[] GetImageAsByteArray(string imageFilePath)
         {
             var webClient = new WebClient();
@@ -60,12 +60,19 @@ namespace FacialRecognitionApp.Services
             return imageBytes;
         }
 
+        public async Task<ApiResult> Identify(StringContent payload)
+        {
+            var uri = new Uri($"{ _configuration["ClientService:BaseApiUrl"] }face/v1.0/identify");
+            var result = await _clientService.SimpleExecute(uri, HttpMethod.Post, payload);
+
+            return result;
+        }
+
         public async Task<ApiResult> VerifyFace(StringContent payload)
         {
             payload.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
             var uri = new Uri($"{ _configuration["ClientService:BaseApiUrl"] }face/v1.0/verify");
-
             var result = await _clientService.SimpleExecute(uri, HttpMethod.Post, payload);
 
             return result;
